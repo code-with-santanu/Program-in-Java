@@ -15,9 +15,9 @@ public class Main {
 
         CompareString obj = new CompareString(str1, str2);
 
-        if ( str1.compareTo(str2) > 0 )
+        if ( obj.compare() > 0 )
             System.out.println("First string is greater than second.");
-        else if ( str1.compareTo(str2) < 0 )
+        else if ( obj.compare() < 0 )
             System.out.println("First string is smaller than second.");
         else 
             System.out.println("Both strings are equal.");
