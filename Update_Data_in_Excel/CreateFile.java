@@ -1,0 +1,69 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import java.io.FileOutputStream;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+
+import java.io.File;  
+import java.io.FileInputStream;  
+import java.util.Iterator;  
+import org.apache.poi.ss.usermodel.Cell;  
+import org.apache.poi.ss.usermodel.Row;  
+import org.apache.poi.xssf.usermodel.XSSFSheet;  
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+
+
+
+public class CreateFile {
+    public void create(String fileName) {
+        try {
+            File obj = new File(fileName);
+            if (obj.createNewFile()) {
+                System.out.println("File Created" + " " + obj.getName());
+            } else {
+                System.out.println("File Already Exists");
+            }
+        } catch (IOException e) {
+            System.out.println("An error Occured");
+            e.printStackTrace();
+        }
+    }
+
+    public void createExcel(String fileName) {
+        try {
+            File file = new File("C:\\demo\\employee.xlsx"); //creating a new file instance  
+            FileInputStream fis = new FileInputStream(file); //obtaining bytes from the file  
+            //creating Workbook instance that refers to .xlsx file  
+            XSSFWorkbook wb = new XSSFWorkbook(fis);
+            XSSFSheet sheet = wb.getSheetAt(0); //creating a Sheet object to retrieve object  
+            Iterator<Row> itr = sheet.iterator(); //iterating over excel file  
+            while (itr.hasNext()) {
+                Row row = itr.next();
+                Iterator<Cell> cellIterator = row.cellIterator(); //iterating over each column  
+                while (cellIterator.hasNext()) {
+                    Cell cell = cellIterator.next();
+                    switch (cell.getCellType()) {
+                        case Cell.CELL_TYPE_STRING: //field that represents string cell type  
+                            System.out.print(cell.getStringCellValue() + "\t\t\t");
+                            break;
+                        case Cell.CELL_TYPE_NUMERIC: //field that represents number cell type  
+                            System.out.print(cell.getNumericCellValue() + "\t\t\t");
+                            break;
+                        default:
+                    }
+                }
+                System.out.println("");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+}
