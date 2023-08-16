@@ -10,6 +10,8 @@ public class Main {
         int min = inp.nextInt();
         int max = inp.nextInt();
 
+        inp.close();
+
         int randomValue = obj.getRandomNumber(min, max);
 
         System.out.println("The random value is: "+ randomValue);
